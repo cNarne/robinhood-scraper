@@ -14,6 +14,10 @@ import io.github.openunirest.http.exceptions.UnirestException;
  */
 public class GetAuthorizationData extends Authorize {
 
+  
+    public static String client_id = "c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS";
+
+
     /**
      * An {@link com.ampro.robinhood.net.ApiMethod} to log the user in. This
      * sends the email and password.
@@ -29,12 +33,13 @@ public class GetAuthorizationData extends Authorize {
     public GetAuthorizationData(String email, String password)
     throws UnirestException {
         super(Configuration.getDefault());
-
-        setUrlBase(RH_URL + "/api-token-auth/");
+        setUrlBase(RH_URL + "/oauth2/token/");
         //Add the parameters into the request
         this.addFieldParameter("username", email);
         this.addFieldParameter("password", password);
-
+        this.addFieldParameter("client_id", client_id);
+        this.addFieldParameter("grant_type", "password");
+        
         this.addHeaderParameter("Content-Type",
                                 "application/x-www-form-urlencoded");
 
