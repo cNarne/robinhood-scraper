@@ -12,22 +12,42 @@ import com.ampro.robinhood.throwables.RequestTooLargeException;
 import com.ampro.robinhood.throwables.TickerNotFoundException;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RobinhoodFinanceService.
+ */
 public class RobinhoodFinanceService
     implements io.github.mainstringargs.stockData.spi.StockDataService {
 
 
+  /** The api. */
   RobinhoodApi api = null;
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see io.github.mainstringargs.stockData.spi.StockDataService#init()
+   */
   public void init() {
 
     api = new RobinhoodApi();
 
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see io.github.mainstringargs.stockData.spi.StockDataService#getServiceName()
+   */
   public String getServiceName() {
     return "Robinhood";
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see io.github.mainstringargs.stockData.spi.StockDataService#getStockData(java.lang.String[])
+   */
   public Map<String, Map<String, Object>> getStockData(String... tickers) {
 
     Map<String, Map<String, Object>> allStockData = new HashMap<String, Map<String, Object>>();
