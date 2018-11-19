@@ -15,7 +15,11 @@ import io.github.openunirest.http.exceptions.UnirestException;
 public class GetAuthorizationData extends Authorize {
 
   
-    public static String client_id = "c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS";
+    /**
+     * The Constant client_id. Value derived from
+     * https://www.reddit.com/r/algotrading/comments/9fatem/robinhood_api_login_issues/
+     */
+    public static final String client_id = "c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS";
 
 
     /**

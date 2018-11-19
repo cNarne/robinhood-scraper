@@ -22,7 +22,8 @@ public class AuthorizationData implements ApiElement {
      * @author Conrad Weisse
      */
     public static class Token implements ApiElement {
-        /** The actual authorization token string */
+        /** The actual authorization token string.
+         * This name must have an underscore for json unmarshalling. */
         private String access_token;
         /** @return The actual authorization token string */
         public String getToken() { return this.access_token; }
