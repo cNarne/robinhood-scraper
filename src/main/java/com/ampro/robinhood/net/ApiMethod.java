@@ -152,7 +152,7 @@ public abstract class ApiMethod {
      *              If the user is not logged in.
 	 */
 	public void addAuthTokenParameter() {
-	    String authToken = "Bearer "+config.getToken();
+	    final String authToken = "Bearer "+config.getToken();
 		addHeaderParameter("Authorization", authToken);
 	}
 

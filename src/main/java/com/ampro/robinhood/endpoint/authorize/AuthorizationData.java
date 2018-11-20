@@ -17,6 +17,18 @@ import com.ampro.robinhood.endpoint.RobinhoodEnum;
  */
 public class AuthorizationData implements ApiElement {
 
+    /** The authorization token used to authorize private ApiMethods */
+    private String access_token;
+  
+    /** The type of multifactor authorization */
+    private String mfa_type;
+  
+    /** Whether multifactor is required to login */
+    private boolean mfa_required = false;
+  
+    /** The multifactor authorization code to enable login */
+    private String mfaCode;
+  
     /**
      * A wrapper for deserializing token strings from Robinhood
      * @author Conrad Weisse
@@ -63,17 +75,6 @@ public class AuthorizationData implements ApiElement {
         public String toString() { return value; }
     }
 
-    /** The authorization token used to authorize private ApiMethods */
-    private String access_token;
-
-    /** The type of multifactor authorization */
-    private String mfa_type;
-
-    /** Whether multifactor is required to login */
-    private boolean mfa_required = false;
-
-    /** The multifactor authorization code to enable login */
-    private String mfaCode;
 
     /** @return The authorization token used to authorize private ApiMethods */
     public String getToken() {
