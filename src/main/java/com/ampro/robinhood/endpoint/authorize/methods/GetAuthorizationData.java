@@ -17,9 +17,10 @@ public class GetAuthorizationData extends Authorize {
   
     /**
      * The Constant client_id. Value derived from
-     * https://www.reddit.com/r/algotrading/comments/9fatem/robinhood_api_login_issues/
+     * https://www.reddit.com/r/algotrading/
+     * comments/9fatem/robinhood_api_login_issues/
      */
-    public static final String client_id = "c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS";
+    public static final String CLIENT_ID = "c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS";
 
 
     /**
@@ -41,7 +42,7 @@ public class GetAuthorizationData extends Authorize {
         //Add the parameters into the request
         this.addFieldParameter("username", email);
         this.addFieldParameter("password", password);
-        this.addFieldParameter("client_id", client_id);
+        this.addFieldParameter("client_id", CLIENT_ID);
         this.addFieldParameter("grant_type", "password");
         
         this.addHeaderParameter("Content-Type",
