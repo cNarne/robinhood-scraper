@@ -64,7 +64,7 @@ import static com.ampro.robinhood.endpoint.authorize.LoginStatus.*;
  */
 public class RobinhoodApi {
 
-	/** The Logger object used for the custom error handling */
+	/**  The Logger object used for the custom error handling. */
 	public static final Logger log = Logger.getLogger(RobinhoodApi.class.getName());
 
 	/**
@@ -107,7 +107,11 @@ public class RobinhoodApi {
         }
 	}
 
-    /** Load the account number into the {@link Configuration} */
+    /**
+     *  Load the account number into the {@link Configuration}.
+     *
+     * @return the login status
+     */
     private LoginStatus loadAccountNumber() {
         try {
             //Save the account number into the config to be used with other methods
@@ -262,8 +266,9 @@ public class RobinhoodApi {
 
 	/**
 	 * Method returning a {@link Account} using the currently logged in
-     * user
-     * @return The requested {@link Account}
+	 * user.
+	 *
+	 * @return The requested {@link Account}
 	 * @throws NotLoggedInException if the user is not logged in
 	 */
 	public Account getAccountData() {
@@ -274,9 +279,9 @@ public class RobinhoodApi {
 	}
 
 	/**
-	 * Method returning a {@link BasicUserInfo} for the currently logged in user
-     *
-     * @return Basic information about the user
+	 * Method returning a {@link BasicUserInfo} for the currently logged in user.
+	 *
+	 * @return Basic information about the user
 	 * @throws NotLoggedInException if the user is not logged in
 	 */
 	public BasicUserInfo getBasicUserInfo()  {
@@ -285,8 +290,9 @@ public class RobinhoodApi {
 
 	/**
 	 * Method returning a {@link BasicAccountHolderInfo} for the currently logged
-     * in user
-     * @return {@link BasicAccountHolderInfo}
+	 * in user.
+	 *
+	 * @return {@link BasicAccountHolderInfo}
 	 * @throws NotLoggedInException if the user is not logged in
 	 */
 	public BasicAccountHolderInfo getAccountHolderInfo() {
@@ -295,9 +301,9 @@ public class RobinhoodApi {
 
 	/**
 	 * Method returning a {@link AccountHolderAffiliation} for the currently
-     * logged in user
-     *
-     * @return {@link AccountHolderAffiliation}
+	 * logged in user.
+	 *
+	 * @return {@link AccountHolderAffiliation}
 	 * @throws NotLoggedInException if the user is not logged in
 	 */
 	public AccountHolderAffiliation getAccountHolderAffiliation() {
@@ -306,9 +312,9 @@ public class RobinhoodApi {
 
 	/**
 	 * Method returning a {@link AccountHolderEmployment} for the currently
-     * logged in user
-     *
-     * @return {@link AccountHolderEmployment}
+	 * logged in user.
+	 *
+	 * @return {@link AccountHolderEmployment}
 	 * @throws NotLoggedInException if the user is not logged in
 	 */
 	public AccountHolderEmployment getAccountHolderEmployment() {
@@ -317,9 +323,9 @@ public class RobinhoodApi {
 
 	/**
 	 * Method returning a {@link AccountHolderInvestmentProfile} for the
-     * currently logged in user
-     *
-     * @return AccountHolderInvestmentProfile
+	 * currently logged in user.
+	 *
+	 * @return AccountHolderInvestmentProfile
 	 * @throws NotLoggedInException if the user is not logged in
 	 */
 	public AccountHolderInvestmentProfile getAccountInvestmentProfile() {
@@ -366,6 +372,8 @@ public class RobinhoodApi {
     }
 
     /**
+     * Gets the orders.
+     *
      * @return Closed and open orders.
      * @throws NotLoggedInException If not logged in
      */
@@ -402,6 +410,8 @@ public class RobinhoodApi {
     }
 
     /**
+     * Make limit stop order.
+     *
      * @param ticker The ticker which the buy or sell order should be performed on
      * @param timeInForce The Enum representation for when this order should be made
      * @param limitPrice The price you're willing to accept in a sell, or pay in a buy
@@ -422,6 +432,8 @@ public class RobinhoodApi {
     }
 
     /**
+     * Make market order.
+     *
      * @param ticker What ticker you are performing this order on
      * @param quantity How many shares should be transacted
      * @param orderType Which type of order is being made. A buy, or a sell.
@@ -439,6 +451,8 @@ public class RobinhoodApi {
     }
 
     /**
+     * Make market stop order.
+     *
      * @param ticker The stock ticker
      * @param quantity The number of elements to order
      * @param orderType {@link OrderTransactionType#BUY} or {@link OrderTransactionType#SELL}
@@ -471,9 +485,9 @@ public class RobinhoodApi {
     }
 
     /**
-     * TODO DOCS
+     * TODO DOCS.
      *
-     * @return
+     * @return the options
      * @throws NotLoggedInException If the instance is not logged in
      */
     public List<Option> getOptions() {
@@ -484,10 +498,10 @@ public class RobinhoodApi {
 	//PUBLIC DATA
 
 	/**
-	 * Method returning a {@link TickerFundamental} for the supplied ticker name
-     *
+	 * Method returning a {@link TickerFundamental} for the supplied ticker name.
+	 *
 	 * @param ticker The Stock's ticker
-     * @return {@link TickerFundamental}
+	 * @return {@link TickerFundamental}
 	 */
 	public TickerFundamental getFundamental(String ticker) {
 		//Create the API method
@@ -543,6 +557,8 @@ public class RobinhoodApi {
    }
 
     /**
+     * Gets the instrument by ticker.
+     *
      * @param ticker The stock ticker
      * @return The {@link Instrument} requested
      * @throws TickerNotFoundException If the ticker is not tracked by Robinhood
@@ -588,15 +604,13 @@ public class RobinhoodApi {
 	/**
 	 * Gets the collection data from Robinhood based on the given Collection
 	 * Name. This method does not require a security token.
-	 *
+	 * 
 	 * Examples of collections include 'manufacturing', 'consumer-product', and
 	 * '100-most-popular'
 	 *
-	 * @param collectionName
-	 *            the collection name
-	 * @return the collection data as a list of {@link Instrument}.
-	 *
 	 * @author MainStringArgs
+	 * @param collectionName            the collection name
+	 * @return the collection data as a list of {@link Instrument}.
 	 */
 	public InstrumentCollectionList getCollectionData(String collectionName) {
 		return new GetCollectionData(collectionName).execute();
@@ -639,20 +653,29 @@ public class RobinhoodApi {
 
     /**
      * Build an {@link Iterable} based off a {@link PaginatedIterator}.
-     * @param elementList The {@link ApiElementList} build from
+     *
      * @param <E> The ApiElement of the List
+     * @param elementList The {@link ApiElementList} build from
      * @return a "Paginated" Iterable
      */
     public <E extends ApiElement> Iterable<E> buildIterable(ApiElementList<E> elementList) {
     	return () -> new PaginatedIterator<>(elementList, RobinhoodApi.this.config);
 	}
 
-	/** @return {@code true} if the API has been logged in */
+	/**
+	 * Checks if is logged in.
+	 *
+	 * @return {@code true} if the API has been logged in
+	 */
 	public boolean isLoggedIn() {
 	    return this.config.hasToken();
     }
 
-    /** @return The API instance's {@link Configuration} */
+    /**
+     * Gets the config.
+     *
+     * @return The API instance's {@link Configuration}
+     */
 	public Configuration getConfig() {
 		return config;
 	}

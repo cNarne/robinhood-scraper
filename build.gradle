@@ -83,9 +83,9 @@ modifyPom {
 }
 
 extraArchive {
-    sources = false
-    tests = false
-    javadoc = false
+    sources = true
+    tests = true
+    javadoc = true
 }
 nexus {
     sign = true
