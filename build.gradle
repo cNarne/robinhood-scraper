@@ -31,7 +31,7 @@ test {
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-archivesBaseName = 'robinhood-dashboard'
+archivesBaseName = 'robinhood-scraper'
 group = 'io.github.mainstringargs'
 version = '1.0'
 rootProject.description = 'A Java wrapper for the Robinhood investing service\'s API'
