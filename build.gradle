@@ -1,13 +1,31 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+   }
+}
+
+
 plugins {
     id 'java'
 	id 'eclipse'
     id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id 'io.codearte.nexus-staging' version '0.11.0'	
 }
+
+apply plugin: 'com.bmuschko.nexus'
 
 repositories {
     mavenCentral()
-    mavenLocal()
     jcenter()
+}
+
+test {
+    exclude '**/*'
 }
 
 sourceCompatibility = '1.8'
@@ -34,12 +52,46 @@ dependencies {
 }
 
 
-task sourcesJar(type: Jar) {
-    from sourceSets.main.allJava
-    classifier 'sources'
+
+modifyPom {
+    project {
+        name 'robinhood-scraper'
+        description 'Robinhood Scraper'
+        url 'https://github.com/mainstringargs/robinhood-scraper'
+        inceptionYear '2018'
+        scm {
+            url 'https://github.com/mainstringargs/robinhood-scraper'
+            connection 'https://github.com/mainstringargs/robinhood-scraper.git'
+            developerConnection 'https://github.com/mainstringargs/robinhood-scraper.git'
+        }
+        licenses {
+            license {
+                name 'MIT License'
+                url 'https://opensource.org/licenses/MIT'
+                distribution 'repo'
+            }
+        }
+        developers {
+            developer {
+                id 'mainstringargs'
+                name 'main(String[] args)'
+                email 'mainstringargs@github.io'
+            }
+        }
+    }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
+extraArchive {
+    sources = false
+    tests = false
+    javadoc = false
+}
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+}
+
+nexusStaging {
+    packageGroup = "io.github.mainstringargs" //optional if packageGroup == project.getGroup()
 }
