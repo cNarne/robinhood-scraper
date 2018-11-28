@@ -33,7 +33,7 @@ sourceCompatibility = '1.8'
 
 archivesBaseName = 'robinhood-scraper'
 group = 'io.github.mainstringargs'
-version = '1.1'
+version = '1.2'
 rootProject.description = 'A Java wrapper for the Robinhood investing service\'s API'
 
 dependencies {
@@ -41,7 +41,7 @@ dependencies {
     compile group: 'io.github.openunirest', name: 'unirest-java', version: '2.2.04' //OpenUnirest
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
-	compile "io.github.mainstringargs:stock-data-spi:1.0"
+	compile "io.github.mainstringargs:stock-data-spi:1.1"
 
 
     //Testing
