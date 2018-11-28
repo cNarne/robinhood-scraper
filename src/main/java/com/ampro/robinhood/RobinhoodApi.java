@@ -20,6 +20,7 @@ import com.ampro.robinhood.endpoint.instrument.data.Instrument;
 import com.ampro.robinhood.endpoint.instrument.data.InstrumentList;
 import com.ampro.robinhood.endpoint.instrument.methods.GetAllInstruments;
 import com.ampro.robinhood.endpoint.instrument.methods.GetInstrumentByTicker;
+import com.ampro.robinhood.endpoint.instrument.methods.GetInstrumentByUrl;
 import com.ampro.robinhood.endpoint.instrument.methods.SearchInstrumentsByKeyword;
 import com.ampro.robinhood.endpoint.option.data.Option;
 import com.ampro.robinhood.endpoint.option.data.OptionList;
@@ -585,6 +586,18 @@ public class RobinhoodApi {
         InstrumentList list = new SearchInstrumentsByKeyword(keyword).execute();
         return list.getResults();
     }
+    
+  /**
+   * Gets the instrument by URL.
+   *
+   * @param instrumentURL the instrument URL
+   * @return the instrument by URL
+   */
+  public Instrument getInstrumentByURL(String instrumentURL) {
+    Instrument inst = new GetInstrumentByUrl(instrumentURL).execute();
+    return inst;
+  }
+
 
     /**
      * Get's every {@link Instrument} tracked by Robinhood.
