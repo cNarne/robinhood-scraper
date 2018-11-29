@@ -1,6 +1,8 @@
 package com.ampro.robinhood.endpoint.orders.methods;
 
+import java.text.DecimalFormat;
 import com.ampro.robinhood.Configuration;
+import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamental;
 import com.ampro.robinhood.endpoint.orders.enums.OrderTransactionType;
 import com.ampro.robinhood.endpoint.orders.enums.TimeInForce;
 import com.ampro.robinhood.throwables.NotLoggedInException;
@@ -39,6 +41,14 @@ public class MakeMarketStopOrder extends OrderMethod {
         this.orderType = orderType;
         this.time = time;
         this.stopPrice = stopPrice;
+        
+
+        //Verify the ticker and add it to the instrument URL to be used for later
+        //Verify the ticker, and add the instrument URL to be used for later
+        TickerFundamental fund = verifyTickerData(this.ticker);
+
+        this.tickerInstrumentUrl = fund.getInstrument().toString();
+          
 
         //Set the normal parameters for this endpoint
         setEndpointParameters();
@@ -46,10 +56,12 @@ public class MakeMarketStopOrder extends OrderMethod {
         //Set the order parameters
         setOrderParameters();
 
-        //Verify the ticker and add it to the instrument URL to be used for later
-        this.tickerInstrumentUrl = verifyTickerData(this.ticker);
 
     }
+    
+
+    DecimalFormat df2 = new DecimalFormat("#####.00");
+
 
     @Override
     protected void setOrderParameters() {
@@ -61,7 +73,7 @@ public class MakeMarketStopOrder extends OrderMethod {
         this.addFieldParameter("trigger", "stop");
         this.addFieldParameter("quantity", String.valueOf(this.quantity));
         this.addFieldParameter("side", orderType.getValue());
-        this.addFieldParameter("stop_price", this.stopPrice);
+        this.addFieldParameter("stop_price", df2.format(this.stopPrice));
     }
 
 }

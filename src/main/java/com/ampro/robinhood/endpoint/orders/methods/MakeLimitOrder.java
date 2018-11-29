@@ -1,6 +1,8 @@
 package com.ampro.robinhood.endpoint.orders.methods;
 
+import java.text.DecimalFormat;
 import com.ampro.robinhood.Configuration;
+import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamental;
 import com.ampro.robinhood.endpoint.orders.data.SecurityOrder;
 import com.ampro.robinhood.endpoint.orders.enums.OrderTransactionType;
 import com.ampro.robinhood.endpoint.orders.enums.TimeInForce;
@@ -42,6 +44,11 @@ public class MakeLimitOrder extends OrderMethod {
         this.limitPrice = limitPrice;
         this.quantity = quantity;
         this.orderType = orderType;
+        
+        //Verify the ticker, and add the instrument URL to be used for later
+        TickerFundamental fund = verifyTickerData(this.ticker);
+
+        this.tickerInstrumentUrl = fund.getInstrument().toString();
 
         //Set the normal parameters for this endpoint
         setEndpointParameters();
@@ -49,10 +56,12 @@ public class MakeLimitOrder extends OrderMethod {
         //Set the order parameters
         setOrderParameters();
 
-        //Verify the ticker, and add the instrument URL to be used for later
-        this.tickerInstrumentUrl = verifyTickerData(this.ticker);
-
+          
     }
+	
+
+    DecimalFormat df2 = new DecimalFormat("#####.00");
+
 
 	@Override
 	protected void setOrderParameters() {
@@ -62,7 +71,7 @@ public class MakeLimitOrder extends OrderMethod {
 		this.addFieldParameter("symbol", this.ticker);
 		this.addFieldParameter("type", "limit");
 		this.addFieldParameter("time_in_force", this.time.toString());
-		this.addFieldParameter("price", this.limitPrice);
+		this.addFieldParameter("price", df2.format(this.limitPrice));
 		this.addFieldParameter("trigger", "immediate");
 		this.addFieldParameter("quantity", String.valueOf(this.quantity));
 		this.addFieldParameter("side", orderType.getValue());

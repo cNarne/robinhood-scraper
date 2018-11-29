@@ -137,9 +137,12 @@ public class RequestManager {
 		try {
 			//Make the request
 			HttpResponse<JsonNode> response = request.asJson();
-			if (!Objects.equals(response.getStatusText(), "OK")) {
-				return null;
-			}
+			
+		    if (!(Objects.equals(response.getStatusText().toUpperCase(), "OK")||
+                Objects.equals(response.getStatusText().toUpperCase(), "CREATED"))) {
+                return null;
+            }
+		    
 			//If the response type for this is VOID (
 			//Meaning we are not expecting a response) do not
 			//try to use Gson

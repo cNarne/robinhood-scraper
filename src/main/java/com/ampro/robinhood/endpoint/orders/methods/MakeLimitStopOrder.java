@@ -1,6 +1,7 @@
 package com.ampro.robinhood.endpoint.orders.methods;
 
 import com.ampro.robinhood.Configuration;
+import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamental;
 import com.ampro.robinhood.endpoint.orders.enums.OrderTransactionType;
 import com.ampro.robinhood.endpoint.orders.enums.TimeInForce;
 import com.ampro.robinhood.throwables.TickerNotFoundException;
@@ -37,8 +38,14 @@ public class MakeLimitStopOrder extends OrderMethod {
     throws TickerNotFoundException {
 
         super(config);
-        this.tickerInstrumentUrl = verifyTickerData(ticker);
         this.ticker = ticker;
+        
+        //Verify the ticker, and add the instrument URL to be used for later
+        TickerFundamental fund = verifyTickerData(this.ticker);
+
+        this.tickerInstrumentUrl = fund.getInstrument().toString();
+          
+        
         this.time = time;
         this.limitPrice = limitPrice;
         this.quantity = quantity;

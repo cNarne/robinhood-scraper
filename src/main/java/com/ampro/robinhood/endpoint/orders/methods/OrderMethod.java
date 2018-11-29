@@ -3,7 +3,12 @@ package com.ampro.robinhood.endpoint.orders.methods;
 import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamental;
 import com.ampro.robinhood.endpoint.fundamentals.methods.GetTickerFundamental;
+import com.ampro.robinhood.endpoint.instrument.data.Instrument;
+import com.ampro.robinhood.endpoint.instrument.data.InstrumentList;
+import com.ampro.robinhood.endpoint.instrument.methods.GetInstrumentByTicker;
 import com.ampro.robinhood.endpoint.orders.data.SecurityOrder;
+import com.ampro.robinhood.endpoint.quote.data.TickerQuote;
+import com.ampro.robinhood.endpoint.quote.methods.GetTickerQuote;
 import com.ampro.robinhood.net.ApiMethod;
 import com.ampro.robinhood.net.request.RequestMethod;
 import com.ampro.robinhood.throwables.NotLoggedInException;
@@ -53,7 +58,7 @@ public abstract class OrderMethod extends ApiMethod {
 	 * @return InstrumentURL to the class to be used in the request
 	 * @throws TickerNotFoundException If the ticker was not found
 	 */
-	protected String verifyTickerData(String ticker)
+	protected TickerFundamental verifyTickerData(String ticker)
 	throws TickerNotFoundException {
 		//Make a Ticker Fundamental API request for the supplied ticker
 		TickerFundamental response = new GetTickerFundamental(ticker).execute();
@@ -65,8 +70,17 @@ public abstract class OrderMethod extends ApiMethod {
 		}
 
 		//Otherwise, supply the InstrumentURL to the class to be used in the request
-		return response.getInstrument().toString();
+		return response;
 	}
+	
+    protected TickerQuote getCurrentQuote(String ticker) throws TickerNotFoundException {
+      TickerQuote quote = new GetTickerQuote(ticker).execute();
+      if (quote == null || quote.getSymbol() == null) {
+        throw new TickerNotFoundException();
+      }
+      return quote;
+    }
+
 
 }
 

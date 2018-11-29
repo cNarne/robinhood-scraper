@@ -21,19 +21,19 @@ public class CancelOrderMethod extends OrderMethod {
     public CancelOrderMethod(SecurityOrder order, Configuration config)
     throws RobinhoodApiException {
         super(config);
-        switch (order.getTransactionState()) {
-            case UNCONFIRMED:
-            case CONFIRMED:
-            case PARTIALLY_FILLED:
-            case FILLED:
-            case REJECTED:
-            case CANCELED:
-            case FAILED:
-                throw new RobinhoodApiException(
-                        "Order " + order.getTransactionState().getValue());
-            default:
-                break;
-        }
+//        switch (order.getTransactionState()) {
+//            case UNCONFIRMED:
+//            case CONFIRMED:
+//            case PARTIALLY_FILLED:
+//            case FILLED:
+//            case REJECTED:
+//            case CANCELED:
+//            case FAILED:
+//                throw new RobinhoodApiException(
+//                        "Order " + order.getTransactionState().getValue());
+//            default:
+//                break;
+//        }
         if (order.getCancel() == null) {
             throw new RobinhoodApiException("Order cancel URL is null.");
         }

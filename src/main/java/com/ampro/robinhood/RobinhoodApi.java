@@ -479,7 +479,6 @@ public class RobinhoodApi {
      * @return The cancelled order as a {@link SecurityOrder}
      * @throws RobinhoodApiException If the order could not be cancelled
      */
-    @Deprecated
     public SecurityOrder cancelOrder(SecurityOrder order)
     throws RobinhoodApiException {
         return new CancelOrderMethod(order, this.config).execute();

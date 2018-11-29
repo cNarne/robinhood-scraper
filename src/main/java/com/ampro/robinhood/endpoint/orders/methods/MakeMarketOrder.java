@@ -1,6 +1,8 @@
 package com.ampro.robinhood.endpoint.orders.methods;
 
+import java.text.DecimalFormat;
 import com.ampro.robinhood.Configuration;
+import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamental;
 import com.ampro.robinhood.endpoint.orders.enums.OrderTransactionType;
 import com.ampro.robinhood.endpoint.orders.enums.TimeInForce;
 import com.ampro.robinhood.throwables.NotLoggedInException;
@@ -16,6 +18,7 @@ public class MakeMarketOrder extends OrderMethod {
     private final OrderTransactionType orderType;
     private final String tickerInstrumentUrl;
     private final TimeInForce time;
+    private double price = 1.0;
 
     /**
      * @param ticker What ticker you are performing this order on
@@ -35,17 +38,25 @@ public class MakeMarketOrder extends OrderMethod {
         this.quantity = quantity;
         this.orderType = orderType;
         this.time = time;
+        
+        this.price = getCurrentQuote(ticker).getLastTradePrice();
+        
 
+        //Verify the ticker, and add the instrument URL to be used for later
+        TickerFundamental fund = verifyTickerData(this.ticker);
+
+        this.tickerInstrumentUrl = fund.getInstrument().toString();
+                
         //Set the normal parameters for this endpoint
         setEndpointParameters();
 
         //Set the order parameters
         setOrderParameters();
 
-        //Verify the ticker, and add the instrument URL to be used for later
-        this.tickerInstrumentUrl = verifyTickerData(this.ticker);
 
     }
+    
+    DecimalFormat df2 = new DecimalFormat("#####.00");
 
     @Override
     protected void setOrderParameters() {
@@ -57,6 +68,7 @@ public class MakeMarketOrder extends OrderMethod {
         this.addFieldParameter("trigger", "immediate");
         this.addFieldParameter("quantity", String.valueOf(this.quantity));
         this.addFieldParameter("side", orderType.getValue());
+        this.addFieldParameter("price", df2.format(price));
     }
 
 }
