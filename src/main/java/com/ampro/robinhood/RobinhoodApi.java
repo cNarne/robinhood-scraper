@@ -22,6 +22,10 @@ import com.ampro.robinhood.endpoint.instrument.methods.GetAllInstruments;
 import com.ampro.robinhood.endpoint.instrument.methods.GetInstrumentByTicker;
 import com.ampro.robinhood.endpoint.instrument.methods.GetInstrumentByUrl;
 import com.ampro.robinhood.endpoint.instrument.methods.SearchInstrumentsByKeyword;
+import com.ampro.robinhood.endpoint.markets.data.MarketHours;
+import com.ampro.robinhood.endpoint.markets.data.MarketList;
+import com.ampro.robinhood.endpoint.markets.methods.GetMarketData;
+import com.ampro.robinhood.endpoint.markets.methods.GetMarketHoursByUrl;
 import com.ampro.robinhood.endpoint.option.data.Option;
 import com.ampro.robinhood.endpoint.option.data.OptionList;
 import com.ampro.robinhood.endpoint.option.methods.GetOptionsMethod;
@@ -321,6 +325,15 @@ public class RobinhoodApi {
 	public AccountHolderEmployment getAccountHolderEmployment() {
 		return new GetAccountHolderEmploymentInfo(this.config).execute();
 	}
+	
+    public MarketList getMarketList() {
+      return new GetMarketData().execute();
+    }
+    
+    public MarketHours getMarketHoursByURL(String url) {
+      return new GetMarketHoursByUrl(url).execute();
+    }
+
 
 	/**
 	 * Method returning a {@link AccountHolderInvestmentProfile} for the
