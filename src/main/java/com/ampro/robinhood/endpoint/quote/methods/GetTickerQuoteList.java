@@ -1,6 +1,7 @@
 package com.ampro.robinhood.endpoint.quote.methods;
 
 
+import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.quote.data.TickerQuoteList;
 import com.ampro.robinhood.net.request.RequestMethod;
 import com.ampro.robinhood.throwables.RequestTooLargeException;
@@ -28,9 +29,9 @@ public class GetTickerQuoteList extends GetQuote {
      * @param tickers The tickers to request quotes of.
      * @throws RequestTooLargeException if the parameter is larger than 1,630
      */
-    public GetTickerQuoteList(Collection<String> tickers)
+    public GetTickerQuoteList(Configuration config, Collection<String> tickers)
     throws RequestTooLargeException {
-        super();
+        super(config);
         if (tickers.size() > MAX_TICKERS) {
             throw new RequestTooLargeException(
                     "Ticker request must be under " + MAX_TICKERS

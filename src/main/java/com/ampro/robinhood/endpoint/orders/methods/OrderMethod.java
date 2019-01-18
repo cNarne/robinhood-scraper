@@ -61,7 +61,7 @@ public abstract class OrderMethod extends ApiMethod {
 	protected TickerFundamental verifyTickerData(String ticker)
 	throws TickerNotFoundException {
 		//Make a Ticker Fundamental API request for the supplied ticker
-		TickerFundamental response = new GetTickerFundamental(ticker).execute();
+		TickerFundamental response = new GetTickerFundamental(this.config, ticker).execute();
 
 		//Does the ticker have a valid Instrument URL?
         //If not, this ticker is invalid. Throw an error.
@@ -74,7 +74,13 @@ public abstract class OrderMethod extends ApiMethod {
 	}
 	
     protected TickerQuote getCurrentQuote(String ticker) throws TickerNotFoundException {
-      TickerQuote quote = new GetTickerQuote(ticker).execute();
+      GetTickerQuote getTickerQuote = new GetTickerQuote(this.config, ticker);
+      
+//      getTickerQuote.addAuthTokenParameter();
+      
+      TickerQuote quote = getTickerQuote.execute();
+      
+      
       if (quote == null || quote.getSymbol() == null) {
         throw new TickerNotFoundException();
       }

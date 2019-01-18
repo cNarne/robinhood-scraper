@@ -1,5 +1,6 @@
 package com.ampro.robinhood.endpoint.fundamentals.methods;
 
+import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamentalList;
 import com.ampro.robinhood.net.request.RequestMethod;
 import com.ampro.robinhood.throwables.RequestTooLargeException;
@@ -11,9 +12,9 @@ public class GetTickerFundamentalList extends GetFundamental {
     /** API supports up to ten per request */
     private static final int MAX_TICKERS = 10;
 
-    public GetTickerFundamentalList(Collection<String> tickers)
+    public GetTickerFundamentalList(Configuration config, Collection<String> tickers)
     throws RequestTooLargeException {
-        super();
+        super(config);
         if (tickers.size() > MAX_TICKERS) {
             throw new RequestTooLargeException(
                     "Ticker request must be under " + MAX_TICKERS

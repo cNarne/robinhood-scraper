@@ -9,6 +9,7 @@ import com.ampro.robinhood.endpoint.quote.data.TickerQuote;
 import com.ampro.robinhood.endpoint.ratings.data.Rating;
 import com.ampro.robinhood.endpoint.ratings.data.RatingList;
 import com.ampro.robinhood.throwables.RequestTooLargeException;
+import com.ampro.robinhood.throwables.RobinhoodApiException;
 import com.ampro.robinhood.throwables.TickerNotFoundException;
 
 
@@ -32,7 +33,13 @@ public class RobinhoodFinanceService
   public void init() {
 
     if (!isInitialized) {
-      api = new RobinhoodApi();
+      try {
+        api = new RobinhoodApi(RobinhoodProperties.getProperty("robinhood.user", ""),
+            RobinhoodProperties.getProperty("robinhood.pass", ""));
+      } catch (RobinhoodApiException e) {
+        e.printStackTrace();
+      }
+
       isInitialized = true;
     }
 

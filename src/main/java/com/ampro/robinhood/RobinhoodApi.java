@@ -518,7 +518,7 @@ public class RobinhoodApi {
 	 */
 	public TickerFundamental getFundamental(String ticker) {
 		//Create the API method
-		return new GetTickerFundamental(ticker).execute();
+		return new GetTickerFundamental(this.config, ticker).execute();
 	}
 
 	/**
@@ -530,7 +530,7 @@ public class RobinhoodApi {
 	 */
 	public List<TickerFundamental> getFundamentalList(Collection<String> tickers)
     throws RequestTooLargeException {
-		TickerFundamentalList list = new GetTickerFundamentalList(tickers).execute();
+		TickerFundamentalList list = new GetTickerFundamentalList(this.config, tickers).execute();
 		List<TickerFundamental> out = new ArrayList<>();
 		buildIterable(list).forEach(out::add);
 		return out;
@@ -547,11 +547,16 @@ public class RobinhoodApi {
 	 */
 	public TickerQuote getQuoteByTicker(String ticker)
     throws TickerNotFoundException {
-        TickerQuote quote = new GetTickerQuote(ticker).execute();
-        if (quote == null || quote.getSymbol() == null) {
-            throw new TickerNotFoundException();
-        }
-		return quote;
+      GetTickerQuote getTickerQuote = new GetTickerQuote(this.config, ticker);
+     
+      
+      TickerQuote quote = getTickerQuote.execute();
+      
+      
+      if (quote == null || quote.getSymbol() == null) {
+        throw new TickerNotFoundException();
+      }
+      return quote;
 	}
 
     /**
@@ -565,7 +570,7 @@ public class RobinhoodApi {
      */
 	public List<TickerQuote> getQuoteListByTickers(Collection<String> tickers)
     throws RequestTooLargeException {
-        TickerQuoteList list = new GetTickerQuoteList(tickers).execute();
+        TickerQuoteList list = new GetTickerQuoteList(this.config,tickers).execute();
         return list.getQuotes();
    }
 
@@ -638,7 +643,7 @@ public class RobinhoodApi {
 	 * @return the collection data as a list of {@link Instrument}.
 	 */
 	public InstrumentCollectionList getCollectionData(String collectionName) {
-		return new GetCollectionData(collectionName).execute();
+		return new GetCollectionData(this.config, collectionName).execute();
 	}
 
     /**
@@ -655,14 +660,14 @@ public class RobinhoodApi {
         List<String> tkList = Arrays.asList(tickers);
         List<String> instrumentIds = new ArrayList<>();
 
-        TickerQuoteList tqeList = new GetTickerQuoteList(tkList).execute();
+        TickerQuoteList tqeList = new GetTickerQuoteList(this.config, tkList).execute();
 
         for (TickerQuote quote : tqeList.getQuotes()) {
             if (quote.getInstrumentId() != null) {
                 instrumentIds.add(quote.getInstrumentId());
             }
         }
-        return new GetRatingsData(instrumentIds).execute();
+        return new GetRatingsData(this.config, instrumentIds).execute();
     }
 
 	/**
@@ -673,7 +678,7 @@ public class RobinhoodApi {
 	 * @return the ratings by instrument ids
 	 */
 	public RatingList getRatingsByInstrumentIds(String... ids) {
-		return new GetRatingsData(ids).execute();
+		return new GetRatingsData(this.config, ids).execute();
 	}
 
     /**

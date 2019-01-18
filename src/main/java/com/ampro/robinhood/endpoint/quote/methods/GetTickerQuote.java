@@ -1,5 +1,6 @@
 package com.ampro.robinhood.endpoint.quote.methods;
 
+import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.quote.data.TickerQuote;
 
 /**
@@ -7,8 +8,8 @@ import com.ampro.robinhood.endpoint.quote.data.TickerQuote;
  */
 public class GetTickerQuote extends GetQuote {
 
-    public GetTickerQuote(String ticker) {
-        super();
+    public GetTickerQuote(Configuration config, String ticker) {
+        super(config);
         this.setUrlBase("https://api.robinhood.com/quotes/{ticker}/");
         addRouteParameter("ticker", ticker);
         //Declare what the response should look like

@@ -1,12 +1,13 @@
 package com.ampro.robinhood.endpoint.fundamentals.methods;
 
+import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.fundamentals.data.TickerFundamental;
 import com.ampro.robinhood.net.request.RequestMethod;
 
 public class GetTickerFundamental extends GetFundamental {
 
-	public GetTickerFundamental(String ticker) {
-		super();
+	public GetTickerFundamental(Configuration config, String ticker) {
+		super(config);
 
 		this.setUrlBase("https://api.robinhood.com/fundamentals/{ticker}/");
 

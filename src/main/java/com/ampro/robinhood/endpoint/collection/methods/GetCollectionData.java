@@ -1,5 +1,6 @@
 package com.ampro.robinhood.endpoint.collection.methods;
 
+import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.collection.data.InstrumentCollectionList;
 import com.ampro.robinhood.endpoint.fundamentals.methods.GetFundamental;
 import com.ampro.robinhood.net.request.RequestMethod;
@@ -19,8 +20,8 @@ public class GetCollectionData extends GetFundamental {
 	 * @param collectionName
 	 *            the collection name to query for.
 	 */
-	public GetCollectionData(final String collectionName) {
-		super();
+	public GetCollectionData(Configuration config, final String collectionName) {
+		super(config);
 
 		this.setUrlBase(RH_URL + "/midlands/tags/tag/{collectionName}/");
 		this.addRouteParameter("collectionName", collectionName);

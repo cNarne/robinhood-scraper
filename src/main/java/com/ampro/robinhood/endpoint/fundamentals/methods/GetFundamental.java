@@ -1,15 +1,15 @@
 package com.ampro.robinhood.endpoint.fundamentals.methods;
 
-import com.ampro.robinhood.net.ApiMethod;
 import com.ampro.robinhood.Configuration;
+import com.ampro.robinhood.endpoint.account.methods.Account;
 
 /**
  * @author Conrad Weiser
  */
-public class GetFundamental extends ApiMethod {
+public class GetFundamental extends Account {
 
-    protected GetFundamental() {
-        super(Configuration.getDefault());
+    protected GetFundamental(Configuration config) {
+        super(config);
     }
 
 }

@@ -6,6 +6,7 @@ import com.ampro.robinhood.util.ChronoFormatter;
 
 import java.net.URL;
 import java.time.ZonedDateTime;
+import java.util.Arrays;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -345,6 +346,20 @@ public class SecurityOrder implements ApiElement {
    */
   public double getPrice() {
     return price;
+  }
+
+  @Override
+  public String toString() {
+    return "SecurityOrder [updated_at=" + updated_at + ", executions=" + Arrays.toString(executions)
+        + ", fees=" + fees + ", cancel=" + cancel + ", id=" + id + ", cumulative_quantity="
+        + cumulative_quantity + ", reject_reason=" + reject_reason + ", state=" + state
+        + ", last_transaction_at=" + last_transaction_at + ", client_id=" + client_id + ", url="
+        + url + ", created_at=" + created_at + ", position=" + position + ", average_price="
+        + average_price + ", extended_hours=" + extended_hours + ", override_day_trade_checks="
+        + override_day_trade_checks + ", override_dtbp_checks=" + override_dtbp_checks + ", ref_id="
+        + ref_id + ", time_in_force=" + time_in_force + ", response_category=" + response_category
+        + ", stop_price=" + stop_price + ", instrument=" + instrument + ", trigger=" + trigger
+        + ", type=" + type + ", price=" + price + "]";
   }
 
 }

@@ -120,4 +120,14 @@ public class Position implements ApiElement {
 
     public String getInstrumentUrl() { return this.instrumentUrl; }
 
+    @Override
+    public String toString() {
+      return "Position [accountUrl=" + accountUrl + ", instrumentUrl=" + instrumentUrl + ", url="
+          + url + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+          + ", sharesHeldForStockGrants=" + sharesHeldForStockGrants + ", intradayQuantity="
+          + intradayQuantity + ", intradayAverageBuyPrice=" + intradayAverageBuyPrice
+          + ", sharesHeldForBuys=" + sharesHeldForBuys + ", averageBuyPrice=" + averageBuyPrice
+          + ", sharesHeldForSells=" + sharesHeldForSells + ", quantity=" + quantity + "]";
+    }
+
 }

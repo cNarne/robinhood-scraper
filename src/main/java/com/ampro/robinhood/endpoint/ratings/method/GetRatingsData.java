@@ -2,7 +2,7 @@ package com.ampro.robinhood.endpoint.ratings.method;
 
 import java.util.Arrays;
 import java.util.Collection;
-
+import com.ampro.robinhood.Configuration;
 import com.ampro.robinhood.endpoint.fundamentals.methods.GetFundamental;
 import com.ampro.robinhood.endpoint.ratings.data.RatingList;
 import com.ampro.robinhood.net.request.RequestMethod;
@@ -19,8 +19,10 @@ public class GetRatingsData extends GetFundamental {
      *
      * @param ids the stock ids
      */
-    public GetRatingsData(String... ids) {
+    public GetRatingsData(Configuration config, String... ids) {
 
+        super(config);
+      
         this.setUrlBase(RH_URL + "/midlands/ratings/");
 
         // convert the ids to a String a strip off the [ and ].
@@ -41,7 +43,9 @@ public class GetRatingsData extends GetFundamental {
      *
      * @param ids The stock ids
      */
-    public GetRatingsData(Collection<String> ids) {
+    public GetRatingsData(Configuration config, Collection<String> ids) {
+        super(config);
+      
         this.setUrlBase(RH_URL + "/midlands/ratings/");
 
         // convert the ids to a String a strip off the [ and ].
