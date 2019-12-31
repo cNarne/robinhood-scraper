@@ -44,6 +44,9 @@ public class GetAuthorizationData extends Authorize {
         this.addFieldParameter("password", password);
         this.addFieldParameter("client_id", CLIENT_ID);
         this.addFieldParameter("grant_type", "password");
+        this.addFieldParameter("scope", "internal");
+        this.addFieldParameter("device_token", "7c638441-5738-481a-82af-fb431d5c6773");
+        this.addFieldParameter("challenge_type", "sms");
         
         this.addHeaderParameter("Content-Type",
                                 "application/x-www-form-urlencoded");
