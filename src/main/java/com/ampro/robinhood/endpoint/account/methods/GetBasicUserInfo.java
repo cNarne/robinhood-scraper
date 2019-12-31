@@ -12,7 +12,7 @@ public class GetBasicUserInfo extends Account {
 
         //This method is ran as GET
         this.setMethodType(RequestMethod.GET);
-        this.addHeaderParameter("authorization", "Bearer"+config.getToken());
+        this.addHeaderParameter("authorization", "Bearer "+config.getToken());
         this.addHeaderParameter("Content-Type", "application/json");
 
         //Declare what the response should look like
